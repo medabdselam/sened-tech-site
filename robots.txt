@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+# مصادر البناء تُنشر مع الموقع لأن GitHub Pages يخدم المستودع كاملًا،
+# لكنها ليست صفحات ولا ينبغي أن تُفهرس.
+Disallow: /build/
 
 Sitemap: https://tech.sened.group/sitemap.xml

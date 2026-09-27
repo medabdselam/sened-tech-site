@@ -22,7 +22,9 @@
      المستعملة في مواد WebGL لاحقًا حتى لا يتفرّع الذهب إلى نسختين. */
   --gold-dark:#6B4E12;
   --gold-base:#D9A93A;       /* = --gold، مكرّر باسم صريح */
-  --gold-hi:#F6E7BC;
+  --gold-warm:#FFD978;       /* ذهب ساطع للمساحات الممتلئة */
+  --gold-hi:#F6E7BC;         /* ذروة لامعة — للحواف الرفيعة لا للمساحات:
+                                 على مساحة ممتلئة يقرأه العين رماديًا */
   --gold-glow:rgba(217,169,58,.30);
   --gold-glow-soft:rgba(217,169,58,.10);
   --gold-edge:rgba(243,220,162,.50);
@@ -135,6 +137,60 @@ html[lang="ar"] .eyebrow{font-family:var(--ar-body);font-size:12.5px}
 .hero-art{margin-inline:auto;width:min(520px,100%)}
 .hero-art img{width:100%;height:auto;animation:hover-drift 11s ease-in-out infinite alternate}
 @keyframes hover-drift{from{transform:translateY(-8px) scale(1)}to{transform:translateY(8px) scale(1.012)}}
+
+/* ---------- شبكة موريتانيا الرقمية ----------
+   حدود حقيقية (geoBoundaries) + عقد على مدن حقيقية. الوسم يُولَّد بـ
+   build/make-hero.mjs ولا يُحرَّر يدويًا.
+
+   كل شيء هنا لأن سياسة CSP هي style-src 'self': لا <style> داخل الـ SVG
+   ولا سمات style=. الوسم يحمل أصنافًا وسمات عرض فقط. */
+.hero-art .mrt{
+  display:block;width:100%;height:auto;overflow:visible;
+  animation:hover-drift 14s ease-in-out infinite alternate;
+}
+
+/* الحدّ: ثلاث طبقات متداخلة. خط واحد يعطي حبرًا، وثلاثة تعطي معدنًا له
+   ظلّ وجسم وذروة — وهو ما يميّز الذهب عن الأصفر (§٤٢). */
+.mrt-o1{stroke:var(--gold-dark);stroke-width:8;opacity:.5}
+.mrt-o2{stroke:var(--gold-base);stroke-width:3.4;opacity:.9}
+.mrt-o3{stroke:var(--gold-hi);stroke-width:1.1}
+
+.mrt-body{opacity:.96}
+
+/* الوصلات: خافتة عمدًا. الشبكة بنية تحتية، والنبضة هي الحدث. */
+.mrt-link{stroke:var(--gold-base);stroke-width:.9;opacity:.2}
+
+/* نبضة واحدة لكل وصلة في كل دورة — pathLength="100" في الوسم يجعل
+   الوحدات نسبية فتتساوى السرعة على الوصلات القصيرة والطويلة. */
+.mrt-pulse{
+  stroke:var(--gold-hi);stroke-width:2.4;stroke-linecap:round;
+  stroke-dasharray:2.5 97.5;
+  animation:mrt-flow 9s linear infinite;
+}
+@keyframes mrt-flow{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
+
+.mrt-node{fill:var(--gold-base);animation:mrt-breathe 6s ease-in-out infinite alternate}
+.mrt-primary{fill:var(--gold-warm)}
+@keyframes mrt-breathe{from{opacity:.62}to{opacity:1}}
+
+/* نواكشوط: حلقة واحدة تتسع وتتلاشى. علامة مركز، لا زينة. */
+.mrt-ring{stroke:var(--gold-edge);stroke-width:1.4;animation:mrt-ping 6s ease-out infinite}
+@keyframes mrt-ping{
+  0%{r:10;opacity:.75}
+  70%{r:34;opacity:0}
+  100%{r:34;opacity:0}
+}
+
+/* التأخيرات موزَّعة على ثمانية دلاء. لا يمكن إعطاء كل عنصر تأخيره الخاص
+   عبر style= (تحجبه الـ CSP)، فالوسم يوزّع الأصناف والـ CSS يوقّتها. */
+.mrt-p0,.mrt-n0{animation-delay:0s}
+.mrt-p1,.mrt-n1{animation-delay:-1.1s}
+.mrt-p2,.mrt-n2{animation-delay:-2.3s}
+.mrt-p3,.mrt-n3{animation-delay:-3.4s}
+.mrt-p4,.mrt-n4{animation-delay:-4.6s}
+.mrt-p5,.mrt-n5{animation-delay:-5.7s}
+.mrt-p6,.mrt-n6{animation-delay:-6.9s}
+.mrt-p7,.mrt-n7{animation-delay:-8s}
 
 /* ---------- الأقسام ---------- */
 .sec{padding:54px 0;border-top:1px solid var(--line-2)}

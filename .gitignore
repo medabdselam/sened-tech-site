@@ -1,0 +1,3 @@
+# صفحة معاينة يولّدها build/make-hero.mjs للتحقق البصري فقط
+build/preview.html
+build/hero.svg.html
