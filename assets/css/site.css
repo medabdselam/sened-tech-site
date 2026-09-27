@@ -1,0 +1,297 @@
+/* سند تِك — tech.sened.group
+   الفكرة: منظومة مدارية. الشركة شمس، والاختصاصات كواكب تدور بعمق حقيقي،
+   والمشاريع أقمار حولها. فضاء أسود، ذهب، وخط آلي للبيانات. بلا سكربتات. */
+
+:root{
+  --void:#05060A;
+  --deep:#0A0C12;
+  --panel:#0E1017;
+  --line:rgba(217,169,58,.16);
+  --line-2:rgba(240,236,224,.09);
+  --gold:#D9A93A;
+  --gold-2:#F3DCA2;
+  --gold-3:#8E6A1C;
+  --star:#EDE9E0;
+  --dim:rgba(237,233,224,.6);
+  --dim-2:rgba(237,233,224,.38);
+  --rad:4px;
+  --ar-disp:"Changa","Noto Kufi Arabic",system-ui,sans-serif;
+  --ar-body:"Almarai","Noto Sans Arabic",system-ui,sans-serif;
+  --lat-body:"Space Grotesk","Inter",system-ui,sans-serif;
+  --mono:"Space Mono",ui-monospace,Consolas,monospace;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:74px}
+body{
+  margin:0;color:var(--star);position:relative;
+  background:
+    radial-gradient(1100px 620px at 78% -6%,rgba(217,169,58,.10),transparent 62%),
+    radial-gradient(760px 520px at 8% 12%,rgba(120,140,255,.05),transparent 60%),
+    var(--void);
+  font-family:var(--ar-body);font-weight:300;font-size:16.5px;line-height:1.9;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+/* غبار نجمي ثابت خلف كل شيء */
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.55;
+  background-image:
+    radial-gradient(1.4px 1.4px at 12% 18%,rgba(243,220,162,.9),transparent),
+    radial-gradient(1.2px 1.2px at 78% 12%,rgba(237,233,224,.8),transparent),
+    radial-gradient(1px 1px at 34% 62%,rgba(243,220,162,.7),transparent),
+    radial-gradient(1.3px 1.3px at 88% 54%,rgba(237,233,224,.7),transparent),
+    radial-gradient(1px 1px at 58% 86%,rgba(243,220,162,.65),transparent),
+    radial-gradient(1.1px 1.1px at 22% 88%,rgba(237,233,224,.6),transparent),
+    radial-gradient(1px 1px at 66% 34%,rgba(243,220,162,.55),transparent),
+    radial-gradient(1.2px 1.2px at 6% 48%,rgba(237,233,224,.5),transparent);
+}
+body > *{position:relative;z-index:1}
+
+html[lang="en"] body,html[lang="fr"] body{font-family:var(--lat-body);line-height:1.75}
+img,svg{max-width:100%;display:block}
+a{color:var(--gold-2);text-decoration:none}
+h1,h2,h3{margin:0;font-family:var(--ar-disp);font-weight:600;line-height:1.3}
+html[lang="en"] h1,html[lang="fr"] h1,
+html[lang="en"] h2,html[lang="fr"] h2,
+html[lang="en"] h3,html[lang="fr"] h3{font-family:var(--lat-body);font-weight:600;letter-spacing:-.015em}
+p{margin:0 0 18px}
+ul,ol{margin:0;padding:0;list-style:none}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+::selection{background:var(--gold);color:#0A0A0C}
+
+.mono,code,.idx,.tag{font-family:var(--mono);direction:ltr;unicode-bidi:embed}
+html[lang="ar"] .tag{font-family:var(--ar-body)}
+code{color:var(--gold-2);background:rgba(217,169,58,.08);border:1px solid var(--line);border-radius:var(--rad);padding:1px 6px;font-size:.84em}
+
+.wrap{width:min(1180px,100% - 32px);margin-inline:auto}
+.wrap.narrow{width:min(780px,100% - 32px)}
+.skip{position:fixed;top:-100px;inset-inline-start:14px;z-index:300;background:var(--gold);color:#0A0A0C;padding:9px 16px;border-radius:var(--rad)}
+.skip:focus{top:14px}
+
+/* ---------- الرأس ---------- */
+#hd{position:sticky;top:0;z-index:100;background:rgba(5,6,10,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-2)}
+.hd-in{width:min(1180px,100% - 32px);margin-inline:auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:9px 0}
+.brand{display:flex;align-items:center;gap:10px;flex:none}
+.brand img{width:38px;height:38px;border-radius:50%}
+.brand-txt{display:flex;flex-direction:column;line-height:1.25}
+.brand-txt b{font-family:var(--ar-disp);font-weight:600;font-size:18px;color:var(--star)}
+html[lang="en"] .brand-txt b,html[lang="fr"] .brand-txt b{font-family:var(--lat-body)}
+.brand-txt span{font-family:var(--mono);font-size:10.5px;color:var(--dim-2);letter-spacing:.04em}
+html[lang="ar"] .brand-txt span{font-family:var(--ar-body);font-size:11.5px;letter-spacing:normal}
+
+.lang{display:flex;gap:1px;margin-inline-start:auto;flex:none;border:1px solid var(--line);border-radius:var(--rad);overflow:hidden}
+.lang a{padding:5px 10px;font-family:var(--mono);font-size:11.5px;color:var(--dim-2)}
+.lang a:hover{color:var(--star)}
+.lang a[aria-current="true"]{background:var(--gold);color:#0A0A0C}
+
+#nav{display:flex;min-width:0;overflow-x:auto;scrollbar-width:none}
+#nav::-webkit-scrollbar{display:none}
+#nav a{padding:6px 12px;font-size:14.5px;color:var(--dim);white-space:nowrap;border-bottom:2px solid transparent}
+#nav a:hover{color:var(--star)}
+#nav a[aria-current="page"]{color:var(--star);border-bottom-color:var(--gold)}
+
+/* ---------- المقدمة ---------- */
+.hero{padding:40px 0 8px}
+.hero-in{display:grid;gap:26px}
+.eyebrow{display:inline-block;font-family:var(--mono);font-size:11px;color:var(--gold);border:1px solid var(--line);border-radius:999px;padding:4px 13px;margin-bottom:18px}
+html[lang="ar"] .eyebrow{font-family:var(--ar-body);font-size:12.5px}
+.hero h1{font-size:clamp(28px,6.6vw,52px);max-width:15ch;margin-bottom:18px}
+.hero .lead{color:var(--dim);font-size:clamp(15.5px,2vw,18px);max-width:54ch;margin-bottom:26px}
+.keys{display:flex;gap:10px;flex-wrap:wrap}
+.key{display:inline-block;padding:12px 24px;border:1px solid var(--line);border-radius:var(--rad);font-size:15px;color:var(--gold-2)}
+.key:hover{border-color:var(--gold);background:rgba(217,169,58,.07)}
+.key:active{transform:translateY(1px)}
+.key-1{background:var(--gold);border-color:var(--gold);color:#0A0A0C;font-weight:600}
+.key-1:hover{background:var(--gold-2);border-color:var(--gold-2);color:#0A0A0C}
+
+/* الشعار في المقدمة — صورة العميل كما هي، بلا إطار ولا قص */
+.hero-art{margin-inline:auto;width:min(520px,100%)}
+.hero-art img{width:100%;height:auto;animation:hover-drift 11s ease-in-out infinite alternate}
+@keyframes hover-drift{from{transform:translateY(-8px) scale(1)}to{transform:translateY(8px) scale(1.012)}}
+
+/* ---------- الأقسام ---------- */
+.sec{padding:54px 0;border-top:1px solid var(--line-2)}
+.label{display:block;font-family:var(--mono);font-size:11px;color:var(--gold);margin-bottom:12px;letter-spacing:.06em}
+html[lang="ar"] .label{font-family:var(--ar-body);font-size:13px;letter-spacing:normal}
+.sec h2{font-size:clamp(22px,4.2vw,34px);margin-bottom:14px;max-width:24ch}
+.sub{color:var(--dim);max-width:62ch;margin-bottom:38px}
+
+/* ---------- حقل الكواكب: الاختصاصات ---------- */
+.galaxy{
+  display:grid;gap:22px;grid-template-columns:1fr;
+  perspective:1400px;perspective-origin:50% 40%;
+}
+.planet{
+  position:relative;transform-style:preserve-3d;
+  padding:26px 24px 24px;border-radius:14px;
+  border:1px solid var(--line-2);
+  background:
+    radial-gradient(120% 90% at 78% 0%,rgba(217,169,58,.10),transparent 58%),
+    linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.008));
+  box-shadow:0 22px 60px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.05);
+  transition:transform .55s cubic-bezier(.2,.8,.2,1),border-color .45s,box-shadow .45s;
+  animation:orbit-float 9s ease-in-out infinite alternate;
+}
+.planet:nth-child(2){animation-duration:10.5s;animation-delay:-1.4s}
+.planet:nth-child(3){animation-duration:8.2s;animation-delay:-2.7s}
+.planet:nth-child(4){animation-duration:11.4s;animation-delay:-.8s}
+.planet:nth-child(5){animation-duration:9.6s;animation-delay:-3.5s}
+.planet:nth-child(6){animation-duration:10.1s;animation-delay:-2.1s}
+.planet:nth-child(7){animation-duration:8.8s;animation-delay:-4.2s}
+.planet:nth-child(8){animation-duration:11s;animation-delay:-1.9s}
+@keyframes orbit-float{
+  from{transform:translate3d(0,-7px,0) rotateX(1.2deg)}
+  to{transform:translate3d(0,7px,14px) rotateX(-1.2deg)}
+}
+.planet:hover,.planet:focus-within{
+  transform:translate3d(0,-10px,46px) rotateX(3deg) rotateY(-3deg);
+  border-color:var(--line);
+  box-shadow:0 34px 80px rgba(0,0,0,.7), 0 0 0 1px rgba(217,169,58,.18), inset 0 1px 0 rgba(255,255,255,.07);
+}
+
+/* الجرم نفسه */
+.orb{
+  display:block;position:relative;width:58px;height:58px;margin-bottom:18px;
+  transform:translateZ(38px);
+}
+.orb i{
+  position:absolute;inset:0;border-radius:50%;display:block;
+  background:
+    radial-gradient(circle at 32% 26%,#F6E7BC 0%,#D9A93A 34%,#8E6A1C 68%,#3A2B0B 100%);
+  box-shadow:0 8px 24px rgba(217,169,58,.3), inset -6px -8px 16px rgba(0,0,0,.55);
+}
+/* حلقة الكوكب */
+.orb::after{
+  content:"";position:absolute;inset:-11px -22px;border-radius:50%;
+  border:1.5px solid rgba(243,220,162,.5);border-inline-color:rgba(243,220,162,.12);
+  transform:rotateX(74deg) rotate(-16deg);
+  animation:ring-spin 16s linear infinite;
+}
+.planet:nth-child(even) .orb::after{animation-duration:22s;animation-direction:reverse}
+@keyframes ring-spin{
+  from{transform:rotateX(74deg) rotate(0deg)}
+  to{transform:rotateX(74deg) rotate(360deg)}
+}
+/* قمر صغير */
+.orb::before{
+  content:"";position:absolute;top:50%;left:50%;width:6px;height:6px;margin:-3px 0 0 -3px;
+  border-radius:50%;background:var(--gold-2);box-shadow:0 0 10px rgba(243,220,162,.9);
+  animation:moon 9s linear infinite;
+}
+@keyframes moon{
+  from{transform:rotate(0deg) translateX(40px) rotate(0deg)}
+  to{transform:rotate(360deg) translateX(40px) rotate(-360deg)}
+}
+.planet:nth-child(3n) .orb::before{animation-duration:13s}
+.planet:nth-child(3n+1) .orb::before{animation-duration:11s;animation-direction:reverse}
+
+.planet h3{font-size:19.5px;color:var(--star);transform:translateZ(26px)}
+.planet p{margin:9px 0 0;color:var(--dim);font-size:15.5px;transform:translateZ(16px)}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px;transform:translateZ(10px)}
+.tag{font-size:11.5px;color:var(--dim-2);border:1px solid var(--line-2);border-radius:999px;padding:3px 10px;background:rgba(5,6,10,.5)}
+
+/* ---------- الأنظمة التي نبنيها ---------- */
+.systems{display:grid;gap:14px;grid-template-columns:1fr}
+.sys{
+  position:relative;padding:20px 20px 18px;border-radius:12px;
+  border:1px solid var(--line-2);background:linear-gradient(180deg,rgba(255,255,255,.028),transparent);
+  transition:transform .45s cubic-bezier(.2,.8,.2,1),border-color .4s,background .4s;
+}
+.sys:hover{transform:translateY(-5px);border-color:var(--line);background:linear-gradient(180deg,rgba(217,169,58,.07),transparent)}
+.sys .dot{
+  position:absolute;inset-inline-end:18px;top:20px;width:9px;height:9px;border-radius:50%;
+  background:radial-gradient(circle at 34% 30%,#F6E7BC,#8E6A1C);box-shadow:0 0 12px rgba(217,169,58,.6);
+}
+.sys h3{font-size:17.5px;color:var(--star);padding-inline-end:22px}
+.sys p{margin:7px 0 0;color:var(--dim);font-size:15px}
+.sys .state{
+  display:inline-block;margin-top:12px;font-family:var(--mono);font-size:11px;
+  color:var(--dim-2);border:1px solid var(--line-2);border-radius:999px;padding:2px 10px;
+}
+html[lang="ar"] .sys .state{font-family:var(--ar-body);font-size:12px}
+.sys.live{border-color:var(--line);background:linear-gradient(180deg,rgba(217,169,58,.09),transparent)}
+.sys.live .state{color:var(--gold-2);border-color:rgba(217,169,58,.4)}
+.sys.live h3{color:var(--gold-2)}
+
+/* كتلة بارزة */
+.slab{border:1px solid var(--line);border-radius:var(--rad);padding:24px;background:linear-gradient(180deg,rgba(217,169,58,.06),transparent)}
+.slab h3{font-size:20px;margin-bottom:10px;color:var(--gold-2)}
+.slab p{margin:0;color:var(--dim);font-size:15.5px}
+.slab p + p{margin-top:12px}
+
+/* خطوات */
+.steps{border-top:1px solid var(--line-2)}
+.steps li{display:grid;grid-template-columns:auto 1fr;gap:5px 14px;padding:18px 0;border-bottom:1px solid var(--line-2)}
+.idx{color:var(--gold);font-size:12.5px;padding-top:5px}
+.steps b{font-family:var(--ar-disp);font-weight:600;font-size:17.5px}
+html[lang="en"] .steps b,html[lang="fr"] .steps b{font-family:var(--lat-body)}
+.steps span{grid-column:2;color:var(--dim);font-size:15.5px}
+
+/* التواصل */
+.contact{border-top:1px solid var(--line-2)}
+.contact a{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;padding:16px 0;border-bottom:1px solid var(--line-2);color:var(--star)}
+.contact a:hover{color:var(--gold-2)}
+.contact .k{font-family:var(--mono);font-size:11px;color:var(--dim-2);padding-top:5px}
+html[lang="ar"] .contact .k{font-family:var(--ar-body);font-size:12.5px}
+.contact .v{font-family:var(--mono);font-size:15px}
+.contact .t{grid-column:2;color:var(--dim);font-size:14.5px}
+
+/* وثائق */
+.document{padding:38px 0 62px}
+.document h1{font-size:clamp(26px,5.4vw,40px);margin-bottom:6px}
+.document .date{font-family:var(--mono);font-size:12px;color:var(--dim-2);margin-bottom:26px}
+.document h2{font-size:clamp(18.5px,3vw,23px);margin:34px 0 10px;padding-top:18px;border-top:1px solid var(--line-2);color:var(--gold-2)}
+.document p,.document li{color:var(--dim);font-size:16px}
+.document strong{color:var(--star);font-weight:400}
+.document ul{display:grid;gap:9px;margin:0 0 18px}
+.document ul li{position:relative;padding-inline-start:18px}
+.document ul li::before{content:"";position:absolute;inset-inline-start:0;top:.92em;width:7px;height:1px;background:var(--gold)}
+
+/* 404 */
+.void-page{padding:80px 0 100px}
+.void-page h1{font-size:clamp(26px,6vw,42px);margin-bottom:12px}
+.void-page p{color:var(--dim)}
+
+/* الذيل */
+footer{border-top:1px solid var(--line-2);padding:26px 0 34px;color:var(--dim-2);font-size:13.5px}
+.foot{display:grid;gap:12px}
+.foot-links{display:flex;flex-wrap:wrap;gap:6px 16px}
+.foot-links a{color:var(--dim);font-size:13.5px}
+.foot-links a:hover{color:var(--star)}
+.copy{margin:0}
+.fine{font-family:var(--mono);font-size:11px;color:rgba(237,233,224,.28);margin:0;max-width:70ch;line-height:1.7}
+html[lang="ar"] .fine{font-family:var(--ar-body);font-size:12px}
+
+.mt{margin-top:20px}
+.mt-lg{margin-top:32px}
+
+@media (min-width:640px){
+  .galaxy{grid-template-columns:repeat(2,1fr)}
+  .systems{grid-template-columns:repeat(2,1fr)}
+}
+@media (min-width:880px){
+  .wrap{width:min(1180px,100% - 44px)}
+  .hd-in{width:min(1180px,100% - 44px);gap:20px;padding:11px 0}
+  .hero{padding:64px 0 16px}
+  .hero-in{grid-template-columns:1.05fr .95fr;align-items:center;gap:46px}
+  .sec{padding:72px 0}
+  .galaxy{grid-template-columns:repeat(3,1fr);gap:24px}
+  .systems{grid-template-columns:repeat(3,1fr)}
+  .contact a{grid-template-columns:auto minmax(0,12ch) 1fr auto}
+  .contact .t{grid-column:3}
+  .contact .v{grid-column:4;justify-self:end}
+  .foot{grid-template-columns:1fr auto;align-items:center}
+  .fine{grid-column:1 / -1}
+}
+@media (max-width:879px){
+  .key{flex:1 1 auto;text-align:center}
+  #nav{order:3;width:100%}
+  .lang{order:2}
+  .hero-art{width:min(400px,100%)}
+}
+/* من يطلب تقليل الحركة: تبقى الأعماق والألوان، وتتوقف الحركة */
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important;transition:none !important}
+  .planet{transform:none}
+}
