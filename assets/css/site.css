@@ -273,25 +273,27 @@ html[lang="ar"] .label{font-family:var(--ar-body);font-size:13px;letter-spacing:
 .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px;transform:translateZ(10px)}
 .tag{font-size:11.5px;color:var(--dim-2);border:1px solid var(--line-2);border-radius:999px;padding:3px 10px;background:rgba(5,6,10,.5)}
 
-/* ---------- الأنظمة التي نبنيها ---------- */
-.systems{display:grid;gap:14px;grid-template-columns:1fr}
-.sys{
-  position:relative;padding:20px 20px 18px;border-radius:12px;
-  border:1px solid var(--line-2);background:linear-gradient(180deg,rgba(255,255,255,.028),transparent);
-  transition:transform .45s cubic-bezier(.2,.8,.2,1),border-color .4s,background .4s;
+/* ---------- عائلات الأنظمة ----------
+   كانت إحدى عشرة بطاقة متجاورة، كلٌّ منها تنتهي بالعبارة نفسها حرفيًا:
+   «قائم — ونخصّصه لمؤسستك». لا شيء يميّز واحدة عن أخرى، فتتوقف العين عن
+   القراءة عند الثالثة. صارت خمس عائلات لكل منها عنوان، فيجد الزائر قطاعه
+   في سطر واحد. والعبارة المكرّرة انتقلت إلى مقدمة القسم حيث تُقال مرة. */
+.families{display:grid;gap:14px;grid-template-columns:1fr}
+.fam{
+  padding:22px 20px 18px;border-radius:12px;
+  border:1px solid var(--line-2);background:var(--glass);
+  transition:transform var(--t-mid) var(--ease),border-color var(--t-mid),background var(--t-mid);
 }
-.sys:hover{transform:translateY(-5px);border-color:var(--line);background:linear-gradient(180deg,rgba(217,169,58,.07),transparent)}
-.sys .dot{
-  position:absolute;inset-inline-end:18px;top:20px;width:9px;height:9px;border-radius:50%;
-  background:radial-gradient(circle at 34% 30%,#F6E7BC,#8E6A1C);box-shadow:0 0 12px rgba(217,169,58,.6);
+.fam:hover{transform:translateY(-4px);border-color:var(--line);background:var(--glass-lit)}
+.fam > h3{
+  font-size:17px;color:var(--gold-2);
+  padding-bottom:12px;border-bottom:1px solid var(--line);
 }
-.sys h3{font-size:17.5px;color:var(--star);padding-inline-end:22px}
-.sys p{margin:7px 0 0;color:var(--dim);font-size:15px}
-.sys .state{
-  display:inline-block;margin-top:12px;font-family:var(--mono);font-size:11px;
-  color:var(--dim-2);border:1px solid var(--line-2);border-radius:999px;padding:2px 10px;
-}
-html[lang="ar"] .sys .state{font-family:var(--ar-body);font-size:12px}
+.fam li{padding:13px 0;border-bottom:1px solid var(--line-2)}
+.fam li:last-child{border-bottom:0;padding-bottom:0}
+.fam b{display:block;font-family:var(--ar-disp);font-weight:600;font-size:15.5px;color:var(--star)}
+html[lang="en"] .fam b,html[lang="fr"] .fam b{font-family:var(--lat-body)}
+.fam li span{display:block;margin-top:4px;color:var(--dim);font-size:14.5px}
 
 /* كتلة بارزة */
 .slab{border:1px solid var(--line);border-radius:var(--rad);padding:24px;background:linear-gradient(180deg,rgba(217,169,58,.06),transparent)}
@@ -347,7 +349,7 @@ html[lang="ar"] .fine{font-family:var(--ar-body);font-size:12px}
 
 @media (min-width:640px){
   .galaxy{grid-template-columns:repeat(2,1fr)}
-  .systems{grid-template-columns:repeat(2,1fr)}
+  .families{grid-template-columns:repeat(2,1fr)}
 }
 @media (min-width:880px){
   .wrap{width:min(1180px,100% - 44px)}
@@ -356,7 +358,7 @@ html[lang="ar"] .fine{font-family:var(--ar-body);font-size:12px}
   .hero-in{grid-template-columns:1.05fr .95fr;align-items:center;gap:46px}
   .sec{padding:72px 0}
   .galaxy{grid-template-columns:repeat(3,1fr);gap:24px}
-  .systems{grid-template-columns:repeat(3,1fr)}
+  .families{grid-template-columns:repeat(3,1fr)}
   .contact a{grid-template-columns:auto minmax(0,12ch) 1fr auto}
   .contact .t{grid-column:3}
   .contact .v{grid-column:4;justify-self:end}
