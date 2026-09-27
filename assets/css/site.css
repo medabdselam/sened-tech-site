@@ -15,6 +15,32 @@
   --dim:rgba(237,233,224,.6);
   --dim-2:rgba(237,233,224,.38);
   --rad:4px;
+
+  /* --- سلّم الذهب المعدني ---------------------------------------------
+     ذهب واحد مسطّح يبدو كطلاء أصفر. المعدن يحتاج أربع درجات على الأقل:
+     برونز غامق في الظل، أساس، ذروة لامعة، وهالة. هذه الأسماء هي نفسها
+     المستعملة في مواد WebGL لاحقًا حتى لا يتفرّع الذهب إلى نسختين. */
+  --gold-dark:#6B4E12;
+  --gold-base:#D9A93A;       /* = --gold، مكرّر باسم صريح */
+  --gold-hi:#F6E7BC;
+  --gold-glow:rgba(217,169,58,.30);
+  --gold-glow-soft:rgba(217,169,58,.10);
+  --gold-edge:rgba(243,220,162,.50);
+
+  /* --- الزجاج والمعدن المظلم --- */
+  --glass:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.008));
+  --glass-lit:linear-gradient(180deg,rgba(217,169,58,.09),transparent);
+  --metal:radial-gradient(circle at 32% 26%,#F6E7BC 0%,#D9A93A 34%,#8E6A1C 68%,#3A2B0B 100%);
+
+  /* --- العمق: ظلّ واحد لكل مستوى ارتفاع، لا أرقام سحرية متناثرة --- */
+  --lift-1:0 22px 60px rgba(0,0,0,.55);
+  --lift-2:0 34px 80px rgba(0,0,0,.70);
+
+  /* --- الإيقاع: بطيء ومتعمّد (§23) --- */
+  --ease:cubic-bezier(.2,.8,.2,1);
+  --t-fast:.28s;
+  --t-mid:.45s;
+  --t-slow:.55s;
   --ar-disp:"Changa","Noto Kufi Arabic",system-ui,sans-serif;
   --ar-body:"Almarai","Noto Sans Arabic",system-ui,sans-serif;
   --lat-body:"Space Grotesk","Inter",system-ui,sans-serif;
@@ -28,7 +54,7 @@ body{
   margin:0;color:var(--star);position:relative;
   background:
     radial-gradient(1100px 620px at 78% -6%,rgba(217,169,58,.10),transparent 62%),
-    radial-gradient(760px 520px at 8% 12%,rgba(120,140,255,.05),transparent 60%),
+    radial-gradient(760px 520px at 8% 12%,rgba(107,78,18,.16),transparent 60%),
     var(--void);
   font-family:var(--ar-body);font-weight:300;font-size:16.5px;line-height:1.9;
   overflow-x:hidden;-webkit-font-smoothing:antialiased;
