@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://tech.sened.group/</loc>
+    <lastmod>2026-09-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://tech.sened.group/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tech.sened.group/en/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tech.sened.group/fr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tech.sened.group/"/>
+  </url>
+  <url><loc>https://tech.sened.group/en/</loc><lastmod>2026-09-27</lastmod></url>
+  <url><loc>https://tech.sened.group/fr/</loc><lastmod>2026-09-27</lastmod></url>
+</urlset>
