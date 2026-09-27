@@ -292,9 +292,6 @@ html[lang="ar"] .label{font-family:var(--ar-body);font-size:13px;letter-spacing:
   color:var(--dim-2);border:1px solid var(--line-2);border-radius:999px;padding:2px 10px;
 }
 html[lang="ar"] .sys .state{font-family:var(--ar-body);font-size:12px}
-.sys.live{border-color:var(--line);background:linear-gradient(180deg,rgba(217,169,58,.09),transparent)}
-.sys.live .state{color:var(--gold-2);border-color:rgba(217,169,58,.4)}
-.sys.live h3{color:var(--gold-2)}
 
 /* كتلة بارزة */
 .slab{border:1px solid var(--line);border-radius:var(--rad);padding:24px;background:linear-gradient(180deg,rgba(217,169,58,.06),transparent)}
@@ -371,6 +368,32 @@ html[lang="ar"] .fine{font-family:var(--ar-body);font-size:12px}
   #nav{order:3;width:100%}
   .lang{order:2}
   .hero-art{width:min(400px,100%)}
+
+  /* الهيدر اللاصق هنا صفّان لا صفّ واحد، فلا بدّ أن تعرف نقطة توقف
+     التمرير ارتفاعه الحقيقي، وإلا اختبأ كل عنوان قسم تحته عند الضغط
+     على رابط في القائمة. */
+  html{scroll-padding-top:120px}
+
+  /* القائمة تُسحب أفقيًا وشريط تمريرها مخفيّ، فلا شيء يخبر الزائر أن
+     خلف الحافة عناصر أخرى. التلاشي عند الطرفين هو ذلك الإخبار. */
+  #nav{
+    -webkit-mask-image:linear-gradient(to right,transparent 0,#000 20px,#000 calc(100% - 20px),transparent 100%);
+    mask-image:linear-gradient(to right,transparent 0,#000 20px,#000 calc(100% - 20px),transparent 100%);
+    scroll-snap-type:x proximity;
+    scroll-padding-inline:16px;
+  }
+  #nav a{scroll-snap-align:center}
+
+  /* أهداف اللمس: روابط الذيل كانت ٢٣ بكسل في اللاتينية (ارتفاع سطرها
+     ١٫٧٥ مقابل ١٫٩ للعربية) — تحت الحد الأدنى ٢٤. */
+  .foot-links a{padding-block:4px}
+  .lang a{padding:7px 11px}
+}
+
+/* تحت ٤٨٠ بكسل كان سطر الوصف تحت الاسم يدفع مبدّل اللغة إلى سطر ثالث،
+   فيأكل الهيدر خُمس الشاشة. السطر زخرفي، والاسم وحده يكفي. */
+@media (max-width:479px){
+  .brand-txt span{display:none}
 }
 /* من يطلب تقليل الحركة: تبقى الأعماق والألوان، وتتوقف الحركة */
 @media (prefers-reduced-motion:reduce){
