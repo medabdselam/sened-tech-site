@@ -4,4 +4,18 @@ Allow: /
 # لكنها ليست صفحات ولا ينبغي أن تُفهرس.
 Disallow: /build/
 
+# زواحف SEO تجارية: استهلاك نطاق ترددي بلا فائدة للموقع.
+# ملاحظة: robots.txt طوعي — الحجب الفعلي يتم عبر قاعدة WAF في Cloudflare.
+User-agent: AhrefsBot
+User-agent: SemrushBot
+User-agent: MJ12bot
+User-agent: DotBot
+User-agent: DataForSeoBot
+User-agent: Bytespider
+User-agent: PetalBot
+User-agent: BLEXBot
+User-agent: SeekportBot
+User-agent: Barkrowler
+Disallow: /
+
 Sitemap: https://tech.sened.group/sitemap.xml
