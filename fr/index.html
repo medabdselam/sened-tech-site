@@ -9,7 +9,7 @@
 <meta name="description" content="Sened Tech est une société technologique mauritanienne : systèmes ERP, applications web et mobiles, IA et agents, entraînement de modèles, cybersécurité, données et infrastructure.">
 <meta name="theme-color" content="#05060A">
 <link rel="canonical" href="https://tech.sened.group/fr/">
-<link rel="alternate" hreflang="ar" href="https://tech.sened.group/">
+<link rel="alternate" hreflang="ar" href="https://tech.sened.group/ar/">
 <link rel="alternate" hreflang="en" href="https://tech.sened.group/en/">
 <link rel="alternate" hreflang="fr" href="https://tech.sened.group/fr/">
 <link rel="alternate" hreflang="x-default" href="https://tech.sened.group/">
@@ -29,7 +29,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700&family=Changa:wght@500;600;700&family=Space+Grotesk:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/site.css?v=122e2fac">
+<link rel="stylesheet" href="/assets/css/site.css?v=bf78d9ec">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -65,6 +65,7 @@
   }
 }
 </script>
+<script src="/assets/js/language-guide.js?v=20260930" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Aller au contenu</a>
@@ -75,10 +76,17 @@
       <img src="/assets/brand/logo-76.jpg" alt="" width="38" height="38">
       <span class="brand-txt"><b>Sened Tech</b><span>logiciels · IA · cybersécurité</span></span>
     </a>
+    <div class="language-control">
     <div class="lang" aria-label="Langue">
-      <a href="/" lang="ar" hreflang="ar">ع</a>
+      <a href="/ar/" lang="ar" hreflang="ar">ع</a>
       <a href="/en/" lang="en" hreflang="en">EN</a>
       <a href="/fr/" aria-current="true" lang="fr" hreflang="fr">FR</a>
+    </div>
+      <div class="language-hint" id="languageHint" role="status" hidden>
+        <p lang="en" dir="ltr">Change your language here: Arabic, French or English.</p>
+        <p lang="ar" dir="rtl">يمكنك تغيير اللغة من هنا: العربية، الفرنسية أو الإنجليزية.</p>
+        <button type="button" id="dismissLanguageHint">Got it / فهمت</button>
+      </div>
     </div>
     <nav id="nav" aria-label="Navigation principale">
       <a href="/fr/" aria-current="page">Accueil</a>

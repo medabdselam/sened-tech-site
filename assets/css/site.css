@@ -402,3 +402,13 @@ html[lang="ar"] .fine{font-family:var(--ar-body);font-size:12px}
   *{animation:none !important;transition:none !important}
   .planet{transform:none}
 }
+
+/* First visit language guide */
+.language-control{position:relative;margin-inline-start:auto;flex:none}
+.language-control .lang{margin-inline-start:0}
+.language-hint{position:absolute;top:calc(100% + 14px);inset-inline-end:0;width:min(280px,calc(100vw - 32px));padding:16px;border:1px solid var(--gold);border-radius:10px;background:var(--panel);color:var(--star);box-shadow:0 12px 30px rgba(0,0,0,.4);z-index:101;font-size:13px;line-height:1.7;font-family:var(--lat-body)}
+.language-hint[hidden]{display:none}
+.language-hint::before{content:"";position:absolute;bottom:100%;inset-inline-end:30px;border:8px solid transparent;border-bottom-color:var(--gold)}
+.language-hint p{margin:0 0 8px}
+.language-hint p[lang="ar"]{font-family:var(--ar-body)}
+.language-hint button{padding:7px 14px;background:var(--gold);color:var(--void);border:0;border-radius:5px;cursor:pointer}

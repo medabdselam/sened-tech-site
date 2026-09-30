@@ -16,7 +16,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 
 const CSS = "../assets/css/site.css";
-const PAGES = ["../index.html", "../en/index.html", "../fr/index.html", "../404.html"];
+const PAGES = ["../index.html", "../ar/index.html", "../en/index.html", "../fr/index.html", "../404.html"];
 
 const cssUrl = new URL(CSS, import.meta.url);
 const hash = createHash("sha256")
