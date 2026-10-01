@@ -6,8 +6,12 @@ output = Path(sys.argv[1]).resolve() if len(sys.argv)>1 else root/'_site'
 if output.exists():
     raise SystemExit('Output must not already exist; choose an empty new path.')
 files = json.loads((root/'tools/public-files.json').read_text(encoding='utf-8'))
+if not isinstance(files, list):
+    raise SystemExit('Manifest must be a JSON array of path strings.')
 checked = []
 for name in files:
+    if not isinstance(name, str) or not name:
+        raise SystemExit('Manifest entries must be non-empty strings: '+repr(name))
     rel = Path(name)
     if rel.is_absolute() or '..' in rel.parts or any(p.startswith('.') for p in rel.parts if p != '.well-known'):
         raise SystemExit('Invalid public path: '+name)

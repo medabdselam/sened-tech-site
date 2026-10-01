@@ -4,7 +4,8 @@
 تدريب نماذج، أمن سيبراني، بيانات وبنية، وهوية وتصميم.
 
 - الإنتاج: <https://tech.sened.group>
-- الاستضافة: GitHub Pages من `main` (ملف `CNAME` يحدد النطاق)
+- الاستضافة: GitHub Pages عبر **GitHub Actions** من `main` — يُنشر ناتج
+  `tools/stage_site.py` فقط، لا المستودع كاملًا (ملف `CNAME` يحدد النطاق)
 - `sened.group` محجوز للشركة الأم لاحقًا، ولا يستضيف موقعًا.
 
 الموقع موقع **خدمات**، لا واجهة عرض لمنتجات. لا يُحال منه إلى مواقع منتجات
@@ -20,7 +21,7 @@
 /assets/brand/logo.jpg        الأصل — ملف العميل، لا يُعدَّل ولا يُعاد ترميزه
 /assets/brand/logo-76.jpg     الهيدر والأيقونة
 /assets/brand/logo-180.jpg    apple-touch-icon
-/build/                       سكربتات توليد، لا تُنشر كصفحات (Disallow في robots)
+/build/                       سكربتات توليد، غير مدرجة في tools/public-files.json فلا تُنشر
 404.html  robots.txt  sitemap.xml  .well-known/security.txt  CNAME  .nojekyll
 ```
 
@@ -69,9 +70,54 @@
   لذلك تُضمَّن هندسة الخريطة وقت البناء ولا تُحمَّل وقت التشغيل.
 - `script-src 'self'` يسمح بسكربتات من أصلنا (مُتحقَّق منه عمليًا)، لكن
   **لا سكربتات مضمّنة ولا CDN ولا import maps**.
-- لا كوكيز، ولا نماذج، ولا أدوات تحليلات. لا JavaScript في الصفحات حتى الآن.
+- لا كوكيز أو نماذج في كود الموقع. سكربت `language-guide.js` يحفظ علامة تفضيل لغوي فقط.
+- قد تضيف إعدادات Cloudflare سكربتات من خارج هذا المستودع؛ يجب التحقق منها في الاستجابة الحية.
 - `frame-ancestors` لا يُكتب في الوسم (المتصفح يتجاهله ويسجّل خطأ).
 - يجب أن يبقى **Enforce HTTPS** مفعّلًا في إعدادات GitHub Pages.
+- لا اعتماديات: لا `package.json` ولا قفل حزم ولا CDN. سكربتات البناء
+  تستورد `node:fs` و`node:crypto` فقط، فلا سطح `npm audit` أصلًا.
+
+### ترويسات الاستجابة — تُسلَّم من Cloudflare لا من المستودع
+
+GitHub Pages لا يسمح بترويسات مخصّصة، والوسم `<meta>` لا يستطيع تسليم
+`frame-ancestors` ولا `X-Frame-Options` ولا HSTS ولا `nosniff`. لذلك تُضاف عند
+الحاجز. **وهي مُفعَّلة ومُتحقَّق منها في الاستجابة الحيّة بتاريخ 2026-10-01:**
+
+```
+Content-Security-Policy: … frame-ancestors 'none' …   ← الترويسة تضيف ما يعجز الوسم عنه
+Strict-Transport-Security: max-age=15552000; includeSubDomains
+X-Frame-Options: DENY
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: accelerometer=(), autoplay=(), camera=(), display-capture=(),
+  encrypted-media=(), fullscreen=(self), geolocation=(), gyroscope=(),
+  magnetometer=(), microphone=(), midi=(), payment=(), usb=(), xr-spatial-tracking=()
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Resource-Policy: same-origin
+```
+
+الترويسة لا تُلغي وسم الـ CSP — المتصفح يطبّق الاثنتين تقاطعيًّا، فيبقى الوسم
+طبقةً ثانية تعمل حتى لو سقط الحاجز. **لا تحذف الوسم اعتمادًا على الترويسة.**
+
+للتحقّق في أي وقت، من PowerShell:
+
+```
+(Invoke-WebRequest https://tech.sened.group/ -Method Head).Headers
+```
+
+### عمل مؤجَّل
+
+- **استضافة الخطوط محليًّا** (Almarai، Changa، Space Grotesk، Space Mono) في
+  `assets/fonts/` بصيغة woff2، ثم تضييق الـ CSP إلى `style-src 'self'` و
+  `font-src 'self'` وحذف سطري `preconnect`. يزيل آخر اتصال خارجي، ويمنع
+  إرسال عنوان IP لكل زائر إلى Google.
+- تفعيل **Secret scanning + Push protection** و**CodeQL** في إعدادات المستودع.
+- **HSTS عند `max-age=15552000`** (١٨٠ يومًا). رفعه إلى `31536000` (سنة) هو شرط
+  الأهلية لقائمة `preload`. لا تضف `preload` بتسرّع: يُلزم **كل** نطاقات
+  `sened.group` الفرعية بـ HTTPS، والخروج من القائمة بطيء.
+- `.well-known/security.txt` ينتهي في **2027-09-27** ويحتاج تجديدًا قبلها.
+- **شغّل `git fetch` قبل أي عمل على نسخة محلية قديمة.** راجعتُ هذا المستودع مرّة
+  على نسخة لم تُجلب، فظهر تحصين مدفوع ومنشور كأنه غير موجود.
 - `.nojekyll` ضروري وإلا استبعد Jekyll مجلد `.well-known` فاختفى `security.txt`.
 
 ## الشعار
@@ -95,3 +141,11 @@ python -m http.server 8766 --directory .
 
 انسخ `en/` إلى مجلد اللغة، وترجم، وعدّل `lang` و `dir` و `canonical` و
 `hreflang`، وأضف اللغة إلى مبدّل اللغة في كل الصفحات وإلى `sitemap.xml`.
+
+## نشر الملفات العامة فقط — تدقيق 2026-09-30
+
+سير العمل `.github/workflows/deploy-pages.yml` ينشر ناتج `tools/stage_site.py` فقط.
+قائمة الملفات المسموحة في `tools/public-files.json`؛ أي ملف جديد مطلوب للموقع يجب إضافته صراحةً.
+اختر **GitHub Actions** في Settings → Pages → Source، خصوصًا عند الانتقال من نشر الفرع.
+لا تعتبر إزالة README وbuild من الموقع الحي مكتملة حتى تنفيذ النشر والتحقق من HTTP 404.
+للبناء المحلي: `python tools/stage_site.py`، ويجب ألا يكون مجلد `_site` موجودًا مسبقًا.

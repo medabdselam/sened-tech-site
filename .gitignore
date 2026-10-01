@@ -1,3 +1,13 @@
 # صفحة معاينة يولّدها build/make-hero.mjs للتحقق البصري فقط
 build/preview.html
 build/hero.svg.html
+
+# Generated public-only deployment artifact
+_site/
+
+# وقاية: لا سرّ في هذا المستودع اليوم، ولا ينبغي أن يدخله واحد غدًا
+.env
+.env.*
+*.pem
+*.key
+

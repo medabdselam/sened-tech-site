@@ -1,0 +1,11 @@
+# إجراءات GitHub هي الاعتمادية الوحيدة في هذا المستودع (لا npm ولا pip).
+# ومهمة النشر تملك pages: write، فإجراء مخترق يستطيع نشر محتوى على النطاق.
+# Dependabot يفتح طلب دمج شهريًا بتحديث البصمات المثبَّتة في deploy-pages.yml.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: "chore(ci)"
