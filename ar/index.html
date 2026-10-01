@@ -35,36 +35,160 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "@id": "https://tech.sened.group/#organization",
-  "name": "سند تِك",
-  "alternateName": ["Sened Tech", "سند للحلول الرقمية"],
-  "url": "https://tech.sened.group/",
-  "logo": "https://tech.sened.group/assets/brand/logo.jpg",
-  "email": "support@sened.group",
-  "areaServed": "MR",
-  "knowsAbout": ["ERP","Web and mobile applications","Artificial intelligence","AI agents","Model training","Cybersecurity","Data engineering","Cloud infrastructure","UI design","Motion graphics"],
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "email": "support@sened.group",
-    "telephone": "+222-32-22-78-35",
-    "contactType": "customer support",
-    "availableLanguage": ["ar","fr","en"]
-  },
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "خدمات سند تِك",
-    "itemListElement": [
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "أنظمة ERP وإدارة الأعمال" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "تطبيقات ويب وهاتف ومكتب" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "الذكاء الاصطناعي في التشغيل" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "الوكلاء والأتمتة" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "تدريب النماذج وضبطها" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "الأمن السيبراني" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "البيانات والبنية التحتية" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "الهوية والتصميم والموشن" } }
-    ]
-  }
+  "@graph": [
+    {
+      "@type": [
+        "Organization",
+        "ProfessionalService"
+      ],
+      "@id": "https://tech.sened.group/#organization",
+      "name": "سند تِك",
+      "alternateName": [
+        "Sened Tech",
+        "سند للحلول الرقمية"
+      ],
+      "description": "الفرع التقني لمجموعة سند، ومقرّه نواكشوط، موريتانيا.",
+      "url": "https://tech.sened.group/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://tech.sened.group/assets/brand/logo.jpg",
+        "width": 1080,
+        "height": 1080
+      },
+      "image": "https://tech.sened.group/assets/brand/logo.jpg",
+      "email": "support@sened.group",
+      "telephone": "+222-32-22-78-35",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "نواكشوط",
+        "addressCountry": "MR"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Mauritania"
+      },
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "مجموعة سند"
+      },
+      "knowsAbout": [
+        "ERP",
+        "Web and mobile applications",
+        "Artificial intelligence",
+        "AI agents",
+        "Model training",
+        "Cybersecurity",
+        "Data engineering",
+        "Cloud infrastructure",
+        "UI design",
+        "Motion graphics"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "support@sened.group",
+        "telephone": "+222-32-22-78-35",
+        "contactType": "customer support",
+        "availableLanguage": [
+          "ar",
+          "fr",
+          "en"
+        ]
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "خدمات سند تِك",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "أنظمة ERP وإدارة الأعمال"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "تطبيقات ويب وهاتف ومكتب"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "الذكاء الاصطناعي في التشغيل"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "الوكلاء والأتمتة"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "تدريب النماذج وضبطها"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "الأمن السيبراني"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "البيانات والبنية التحتية"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "الهوية والتصميم والموشن"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://tech.sened.group/#website",
+      "url": "https://tech.sened.group/",
+      "name": "سند تِك",
+      "publisher": {
+        "@id": "https://tech.sened.group/#organization"
+      },
+      "inLanguage": [
+        "ar",
+        "en",
+        "fr"
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://tech.sened.group/ar/#webpage",
+      "url": "https://tech.sened.group/ar/",
+      "name": "سند تِك — برمجيات وذكاء اصطناعي وأمن سيبراني",
+      "description": "الفرع التقني لمجموعة سند، ومقرّه نواكشوط، موريتانيا.",
+      "isPartOf": {
+        "@id": "https://tech.sened.group/#website"
+      },
+      "about": {
+        "@id": "https://tech.sened.group/#organization"
+      },
+      "primaryImageOfPage": {
+        "@id": "https://tech.sened.group/assets/brand/logo.jpg"
+      },
+      "inLanguage": "ar"
+    }
+  ]
 }
 </script>
 <script src="/assets/js/language-guide.js?v=20261001" defer></script>

@@ -1,0 +1,41 @@
+# Sened Tech
+
+> Sened Tech (Arabic: سند تِك) is a Mauritanian technology company based in
+> Nouakchott, Mauritania. It is the technology branch of the Sened group and
+> builds ERP systems, web, mobile and desktop applications, artificial
+> intelligence and agent systems, model training, cybersecurity, data
+> engineering and cloud infrastructure, and brand and motion design.
+
+Sened Tech sells services, not products. Every page on this site ends at a
+single point of contact; the site deliberately links to no product sites.
+
+- Founded as the technology branch of the Sened group.
+- Based in Nouakchott, Mauritania; serves clients wherever their business runs.
+- Working languages: Arabic, French, English.
+- Contact: support@sened.group · +222 32 22 78 35 · https://wa.me/22232227835
+
+## Pages
+
+- [Home (English)](https://tech.sened.group/en/): services, approach and contact.
+- [الصفحة الرئيسية (العربية)](https://tech.sened.group/ar/): الخدمات والمنهج والتواصل.
+- [Accueil (Français)](https://tech.sened.group/fr/) : services, approche et contact.
+
+## Services
+
+- ERP and business management systems
+- Web, mobile and desktop applications
+- Artificial intelligence in daily operations
+- Agents and automation
+- Model training and tuning
+- Cybersecurity: posture assessment, penetration testing under written
+  authorization, hardening, pre-release code review, and incident response
+- Data engineering and cloud infrastructure
+- Brand, design and motion
+
+## Notes for citation
+
+- Preferred company name: Sened Tech (English), سند تِك (Arabic).
+- Canonical site: https://tech.sened.group/
+- Security contact and policy: https://tech.sened.group/.well-known/security.txt
+- Cybersecurity work is performed only within an agreed scope and with written
+  authorization from the system owner.

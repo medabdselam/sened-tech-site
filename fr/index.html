@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Sened Tech — logiciels, IA et cybersécurité</title>
-<meta name="description" content="Sened Tech est une société technologique mauritanienne : systèmes ERP, applications web et mobiles, IA et agents, entraînement de modèles, cybersécurité, données et infrastructure.">
+<meta name="description" content="Société technologique mauritanienne à Nouakchott : systèmes ERP, applications web et mobiles, IA et agents, cybersécurité, données et infrastructure.">
 <meta name="theme-color" content="#05060A">
 <link rel="canonical" href="https://tech.sened.group/fr/">
 <link rel="alternate" hreflang="ar" href="https://tech.sened.group/ar/">
@@ -33,36 +33,160 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "@id": "https://tech.sened.group/#organization",
-  "name": "Sened Tech",
-  "alternateName": ["سند تِك", "Sened Solutions Numériques"],
-  "url": "https://tech.sened.group/fr/",
-  "logo": "https://tech.sened.group/assets/brand/logo.jpg",
-  "email": "support@sened.group",
-  "areaServed": "MR",
-  "knowsAbout": ["ERP","Applications web et mobiles","Intelligence artificielle","Agents IA","Entraînement de modèles","Cybersécurité","Ingénierie des données","Infrastructure cloud","Design d'interfaces","Motion design"],
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "email": "support@sened.group",
-    "telephone": "+222-32-22-78-35",
-    "contactType": "customer support",
-    "availableLanguage": ["ar","fr","en"]
-  },
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "Services Sened Tech",
-    "itemListElement": [
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "ERP et gestion d'entreprise" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Applications web, mobiles et bureau" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "L'IA dans l'exploitation" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Agents et automatisation" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Entraînement et réglage de modèles" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cybersécurité" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Données et infrastructure" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Identité, design et motion" } }
-    ]
-  }
+  "@graph": [
+    {
+      "@type": [
+        "Organization",
+        "ProfessionalService"
+      ],
+      "@id": "https://tech.sened.group/#organization",
+      "name": "Sened Tech",
+      "alternateName": [
+        "سند تِك",
+        "Sened Digital Solutions"
+      ],
+      "description": "La branche technologique du groupe Sened, basée à Nouakchott, Mauritanie.",
+      "url": "https://tech.sened.group/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://tech.sened.group/assets/brand/logo.jpg",
+        "width": 1080,
+        "height": 1080
+      },
+      "image": "https://tech.sened.group/assets/brand/logo.jpg",
+      "email": "support@sened.group",
+      "telephone": "+222-32-22-78-35",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Nouakchott",
+        "addressCountry": "MR"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Mauritania"
+      },
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Groupe Sened"
+      },
+      "knowsAbout": [
+        "ERP",
+        "Applications web et mobiles",
+        "Intelligence artificielle",
+        "Agents IA",
+        "Entraînement de modèles",
+        "Cybersécurité",
+        "Ingénierie des données",
+        "Infrastructure cloud",
+        "Design d'interfaces",
+        "Motion design"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "support@sened.group",
+        "telephone": "+222-32-22-78-35",
+        "contactType": "customer support",
+        "availableLanguage": [
+          "ar",
+          "fr",
+          "en"
+        ]
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Services de Sened Tech",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "ERP et gestion d'entreprise"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Applications web, mobiles et bureau"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "L'IA dans l'exploitation"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Agents et automatisation"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Entraînement et réglage de modèles"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Cybersécurité"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Données et infrastructure"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Identité, design et motion"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://tech.sened.group/#website",
+      "url": "https://tech.sened.group/",
+      "name": "Sened Tech",
+      "publisher": {
+        "@id": "https://tech.sened.group/#organization"
+      },
+      "inLanguage": [
+        "ar",
+        "en",
+        "fr"
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://tech.sened.group/fr/#webpage",
+      "url": "https://tech.sened.group/fr/",
+      "name": "Sened Tech — logiciels, IA et cybersécurité",
+      "description": "La branche technologique du groupe Sened, basée à Nouakchott, Mauritanie.",
+      "isPartOf": {
+        "@id": "https://tech.sened.group/#website"
+      },
+      "about": {
+        "@id": "https://tech.sened.group/#organization"
+      },
+      "primaryImageOfPage": {
+        "@id": "https://tech.sened.group/assets/brand/logo.jpg"
+      },
+      "inLanguage": "fr"
+    }
+  ]
 }
 </script>
 <script src="/assets/js/language-guide.js?v=20261001" defer></script>
