@@ -1,6 +1,7 @@
 # security.txt — سند تِك / Sened Tech
 # https://www.rfc-editor.org/rfc/rfc9116
 
+Contact: https://github.com/medabdselam/sened-tech-site/security/advisories/new
 Contact: mailto:support@sened.group
 Expires: 2027-09-27T00:00:00.000Z
 Preferred-Languages: ar, en, fr
