@@ -81,14 +81,18 @@
 | `/cdn-cgi/challenge-platform/.../jsd/main.js` + سكربت مضمّن | Bot Fight Mode | الملف يمرّ، والمضمّن **محجوب** |
 | `/cdn-cgi/scripts/.../email-decode.min.js` | Email Address Obfuscation | يمرّ (من أصلنا) |
 
-**RUM مُفعَّل ولا يجمع شيئًا.** لوحة Cloudflare نفسها تقول «No data available»،
-لأن `script-src 'self'` تحجب الـ beacon منذ وُضعت السياسة. النتيجة أربعة أخطاء
-console لكل زائر مقابل صفر بيانات.
+**RUM — أُطفئ 2026-10-01.** كان يحقن الـ beacon ولا يجمع شيئًا، لأن
+`script-src 'self'` تحجبه منذ وُضعت السياسة؛ ولوحة Cloudflare نفسها كانت تقول
+«No data available». أربعة أخطاء console لكل زائر مقابل صفر بيانات.
 
-**الإطفاء ليس في Web Analytics على مستوى الحساب** (تلك القائمة فارغة وتعيدك إلى
-صفحة الإضافة)، بل في:
+**موضع الإطفاء ليس Web Analytics على مستوى الحساب** (تلك القائمة فارغة وتعيدك
+إلى صفحة الإضافة — وهذا مضلِّل)، بل:
 `sened.group → Speed → Real user monitoring → **Disable completely**`.
-لا توسّع الـ CSP للسماح به — لا شيء يُفقَد لأنه لم يعمل أصلًا، والسياسة تبقى محكمة.
+الصفحة تقول الآن `RUM is currently disabled for this zone`.
+
+**مُتحقَّق منه بعد الإطفاء:** لا أثر لـ `cloudflareinsights` في HTML أيٍّ من
+المواقع الثلاثة، وأخطاء الـ console في تبويب نظيف نزلت من أربعة إلى اثنين.
+الباقيان من Bot Fight Mode ومقبولان عمدًا — لا تُوسّع الـ CSP لأجلهما.
 
 **Bot Fight Mode:** سكربته المضمّن محجوب أيضًا، وهذا مقبول — الحماية الحقيقية
 تقع عند الحاجز لا في المتصفح. لا تُطفئه، ولا تُضف `'unsafe-inline'` لأجله.
@@ -144,7 +148,8 @@ Cross-Origin-Resource-Policy: same-origin
 
 ### عمل مؤجَّل
 
-- **إطفاء RUM** من `Speed → Real user monitoring → Disable completely` (أعلاه).
+- **رفع `max-age` في HSTS** من ستة أشهر إلى سنة (`SSL/TLS → Edge Certificates`).
+  أبقِ `preload` مُطفأً — يُلزم كل نطاقات `sened.group` الفرعية بلا رجعة سهلة.
 - **تجربة `Cloudflare Fonts`** (`Speed → Settings → Content Optimization`، مُطفأ
   حاليًّا): يخدم خطوط Google من نطاقنا نفسه، فيحلّ مسألة الخصوصية أدناه بلا
   استضافة يدوية ولا زيادة وزن. **لكنه يكسر الموقع إن فُعِّل وحده:** الخطوط تصير
