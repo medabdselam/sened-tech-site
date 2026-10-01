@@ -71,13 +71,33 @@
 - `script-src 'self'` يسمح بسكربتات من أصلنا (مُتحقَّق منه عمليًا)، لكن
   **لا سكربتات مضمّنة ولا CDN ولا import maps**.
 - لا كوكيز أو نماذج في كود الموقع. سكربت `language-guide.js` يحفظ علامة تفضيل لغوي فقط.
-- **Cloudflare Web Analytics مُفعَّل ومحجوب.** تحقّقنا حيًّا في 2026-10-01: يحقن
-  Cloudflare وسم `beacon.min.js` من `static.cloudflareinsights.com` وسكربتًا
-  مضمّنًا في كل صفحة، والـ CSP تحجب الاثنين (`script-src 'self'`). النتيجة:
-  أربع أخطاء في console كل زائر، وصفر بيانات تحليلية منذ وُضعت السياسة.
-  الحلّ الصحيح **إطفاء Web Analytics من لوحة Cloudflare** — لا توسيع الـ CSP.
-  لا شيء يُفقَد لأنه لم يعمل أصلًا، والسياسة تبقى محكمة. (هذا دليل عملي أيضًا
-  على أن الـ CSP تعمل: حجبت سكربتًا حقنه الحاجز نفسه لا المستودع.)
+### ما تحقنه Cloudflare في كل صفحة — مقيس من HTML الحيّ 2026-10-01
+
+ثلاثة أشياء ليست في هذا المستودع، ومصادرها مختلفة:
+
+| المحقون | المصدر | حالته تحت الـ CSP |
+|---|---|---|
+| `static.cloudflareinsights.com/beacon.min.js` | **Real User Measurements (RUM)** | **محجوب** |
+| `/cdn-cgi/challenge-platform/.../jsd/main.js` + سكربت مضمّن | Bot Fight Mode | الملف يمرّ، والمضمّن **محجوب** |
+| `/cdn-cgi/scripts/.../email-decode.min.js` | Email Address Obfuscation | يمرّ (من أصلنا) |
+
+**RUM مُفعَّل ولا يجمع شيئًا.** لوحة Cloudflare نفسها تقول «No data available»،
+لأن `script-src 'self'` تحجب الـ beacon منذ وُضعت السياسة. النتيجة أربعة أخطاء
+console لكل زائر مقابل صفر بيانات.
+
+**الإطفاء ليس في Web Analytics على مستوى الحساب** (تلك القائمة فارغة وتعيدك إلى
+صفحة الإضافة)، بل في:
+`sened.group → Speed → Real user monitoring → **Disable completely**`.
+لا توسّع الـ CSP للسماح به — لا شيء يُفقَد لأنه لم يعمل أصلًا، والسياسة تبقى محكمة.
+
+**Bot Fight Mode:** سكربته المضمّن محجوب أيضًا، وهذا مقبول — الحماية الحقيقية
+تقع عند الحاجز لا في المتصفح. لا تُطفئه، ولا تُضف `'unsafe-inline'` لأجله.
+
+**Email Obfuscation يُعيد كتابة روابط `mailto:`** إلى `/cdn-cgi/l/email-protection#…`
+تحتاج جافاسكربت لفكّها. تعمل اليوم لأن السكربت من أصلنا فتمرّ، لكن انتبه: زائر
+بلا جافاسكربت لا يصل إلى البريد، وكل مسارات الموقع تنتهي عند `support@sened.group`.
+
+هذا كلّه دليل عملي على أن الـ CSP تعمل: حجبت سكربتات حقنها الحاجز نفسه لا المستودع.
 - `frame-ancestors` لا يُكتب في الوسم (المتصفح يتجاهله ويسجّل خطأ).
 - يجب أن يبقى **Enforce HTTPS** مفعّلًا في إعدادات GitHub Pages.
 - لا اعتماديات: لا `package.json` ولا قفل حزم ولا CDN. سكربتات البناء
@@ -113,7 +133,13 @@ Cross-Origin-Resource-Policy: same-origin
 
 ### عمل مؤجَّل
 
-- **إطفاء Cloudflare Web Analytics** (أعلاه) — الإجراء الحيّ الوحيد المتبقّي.
+- **إطفاء RUM** من `Speed → Real user monitoring → Disable completely` (أعلاه).
+- **تجربة `Cloudflare Fonts`** (`Speed → Settings → Content Optimization`، مُطفأ
+  حاليًّا): يخدم خطوط Google من نطاقنا نفسه، فيحلّ مسألة الخصوصية أدناه بلا
+  استضافة يدوية ولا زيادة وزن. **لكنه يكسر الموقع إن فُعِّل وحده:** الخطوط تصير
+  من أصلنا بينما `font-src` يسمح بـ `fonts.gstatic.com` فقط. يجب أولًا إضافة
+  `'self'` إلى `font-src` و`style-src` في وسوم الصفحات الخمس **وفي قاعدة
+  الترويسات عند Cloudflare**، ثم التفعيل، ثم فحص بصري للعربية.
 - **استضافة الخطوط محليًّا** (Almarai، Changa، Space Grotesk، Space Mono) في
   `assets/fonts/` بصيغة woff2، ثم تضييق الـ CSP إلى `style-src 'self'` و
   `font-src 'self'` وحذف سطري `preconnect`. يزيل آخر اتصال خارجي، ويمنع
