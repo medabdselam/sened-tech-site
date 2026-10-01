@@ -223,6 +223,23 @@ Google وBing وDuckDuckGo. الموقع عمره أيام، ولم يُسجَّ
 وApplebot. لا Bot Fight Mode ولا WAF يعترضها — **لا تحجبها في robots.txt**،
 فهي قناة الاكتشاف الوحيدة إلى أجوبة الذكاء الاصطناعي.
 
+**IndexNow:** `9cd8913658a036d97ae9810ce65aee99.txt` في الجذر هو مفتاح الإخطار
+الفوري لـ Bing وYandex. **لا يُحذف ولا يُعاد توليده** — حذفه يبطل الإخطار بصمت.
+بعد أي نشر، أخطِر المحركات بالعناوين المتغيّرة:
+
+```
+curl -s -X POST https://api.indexnow.org/indexnow -H "Content-Type: application/json" -d "{\"host\":\"tech.sened.group\",\"key\":\"9cd8913658a036d97ae9810ce65aee99\",\"keyLocation\":\"https://tech.sened.group/9cd8913658a036d97ae9810ce65aee99.txt\",\"urlList\":[\"https://tech.sened.group/en/\",\"https://tech.sened.group/ar/\",\"https://tech.sened.group/fr/\"]}"
+```
+
+استجابة `200` أو `202` تعني القبول. المفتاح **ليس سرًّا** — يجب أن يكون عامًّا
+ليتحقّق منه المحرّك.
+
+**ملاحظة على قراءة لوحة Bing:** رسالة «الرابط معروف لدى Bing لكنه يعاني من
+مشاكل تمنع فهرسته» **نصّ جاهز يُعرَض لكل رابط لم يُزحف إليه بعد**، ولا يسمّي
+مشكلة لأنه لم يجد واحدة. تحقّقنا 2026-10-01: لا `X-Robots-Tag`، ولا وسم
+`noindex`، ولا حجب لـ `bingbot`، وهو يتلقّى `200` على الصفحات الثلاث. البطء
+سببه عمر الموقع وقلّة الروابط الخارجية، لا عطب فيه.
+
 **متبقٍّ (يحتاج حسابات المالك):**
 - **Bing Webmaster Tools** — الأهم بعد Google، لأن بحث ChatGPT يعتمد عليه.
   يسمح بالاستيراد المباشر من Search Console.
