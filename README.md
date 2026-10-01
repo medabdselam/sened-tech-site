@@ -126,7 +126,7 @@ GitHub Pages لا يسمح بترويسات مخصّصة، والوسم `<meta>`
 
 ```
 Content-Security-Policy: … frame-ancestors 'none' …   ← الترويسة تضيف ما يعجز الوسم عنه
-Strict-Transport-Security: max-age=15552000; includeSubDomains
+Strict-Transport-Security: max-age=31536000; includeSubDomains
 X-Frame-Options: DENY
 X-Content-Type-Options: nosniff
 Referrer-Policy: strict-origin-when-cross-origin
@@ -140,6 +140,15 @@ Cross-Origin-Resource-Policy: same-origin
 الترويسة لا تُلغي وسم الـ CSP — المتصفح يطبّق الاثنتين تقاطعيًّا، فيبقى الوسم
 طبقةً ثانية تعمل حتى لو سقط الحاجز. **لا تحذف الوسم اعتمادًا على الترويسة.**
 
+**HSTS مُدَّد إلى سنة 2026-10-01** (كان ١٨٠ يومًا). `includeSubDomains` مُفعَّل،
+و`preload` **مُطفأ عمدًا**: تفعيله يُلزم كل نطاقات `sened.group` الفرعية — القائمة
+والمستقبلية — بـ HTTPS، والخروج منها يستغرق شهورًا لأنه ينتظر تحديث المتصفحات.
+
+نتيجة `includeSubDomains`: **أي نطاق فرعي جديد يجب أن يعمل بـ HTTPS من أول
+لحظة**، وإلا رفض المتصفح فتحه بلا زرّ تجاوز. هذا ليس قيدًا عمليًّا ما دام النطاق
+يمرّ عبر Cloudflare (شهادة تلقائية مجانية)، لكن **لا تُوجِّه نطاقًا فرعيًّا إلى
+خادم تجريبي بلا شهادة** — سيفشل مرّتين: من HSTS ومن `Full (strict)`.
+
 للتحقّق في أي وقت، من PowerShell:
 
 ```
@@ -148,8 +157,6 @@ Cross-Origin-Resource-Policy: same-origin
 
 ### عمل مؤجَّل
 
-- **رفع `max-age` في HSTS** من ستة أشهر إلى سنة (`SSL/TLS → Edge Certificates`).
-  أبقِ `preload` مُطفأً — يُلزم كل نطاقات `sened.group` الفرعية بلا رجعة سهلة.
 - **تجربة `Cloudflare Fonts`** (`Speed → Settings → Content Optimization`، مُطفأ
   حاليًّا): يخدم خطوط Google من نطاقنا نفسه، فيحلّ مسألة الخصوصية أدناه بلا
   استضافة يدوية ولا زيادة وزن. **لكنه يكسر الموقع إن فُعِّل وحده:** الخطوط تصير
